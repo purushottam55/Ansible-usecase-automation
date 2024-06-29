@@ -1,0 +1,10 @@
+---
+- name: Fetch current time using Ansible facts
+  hosts: all
+  gather_facts: yes
+
+  tasks:
+    - name: Display current time
+      debug:
+        msg: "Current time on {{ ansible_hostname }} is {{ ansible_date_time.date }} {{ ansible_date_time.time }}"
+
