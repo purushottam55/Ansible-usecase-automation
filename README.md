@@ -1,5 +1,5 @@
 # Ansible-usecase-automation
-It's the project using ansible to automate the workload on running vm's in ubuntu and centos
+This repository contains Ansible playbooks and scripts to automate the workload on running VMs in Ubuntu and CentOS environments. The automation includes installing Apache Tomcat, monitoring system workload, and more.
 
 
 User Story :
@@ -12,4 +12,8 @@ User Story :
 
 
 
+## Prerequisites
+- Docker
+- Git
+- Ansible
 
