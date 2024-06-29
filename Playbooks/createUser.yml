@@ -1,0 +1,15 @@
+---
+- name: Create a new user and set password
+  hosts: all
+  become: yes
+
+  vars:
+    newuser_password: 2001  
+
+  tasks:
+    - name: Create the new user
+      user:
+        name: newuser
+        password: "{{ newuser_password }}"
+        state: present
+        shell: /bin/bash
