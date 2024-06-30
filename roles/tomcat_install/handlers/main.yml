@@ -1,0 +1,8 @@
+#handlers file for tomcat_install
+---
+- name: Restart Tomcat
+  become: yes
+  systemd:
+    name: tomcat
+    state: restarted
+

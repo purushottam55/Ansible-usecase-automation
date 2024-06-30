@@ -1,0 +1,7 @@
+---
+- name: Install Apache Tomcat on Ubuntu and CentOS
+  hosts: all
+
+  roles:
+    - role: tomcat_install
+

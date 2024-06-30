@@ -1,0 +1,42 @@
+---
+- name: Fetch top 5 running processes by CPU usage
+  hosts: all
+  gather_facts: yes
+  tasks:
+    - name: Ensure procps package is installed (CentOS)
+      yum:
+        name: procps-ng
+        state: present
+      when: ansible_facts['os_family'] == "RedHat"
+
+    - name: Ensure procps package is installed (Ubuntu)
+      apt:
+        name: procps
+        state: present
+        update_cache: yes
+      when: ansible_facts['os_family'] == "Debian"
+
+    - name: Fetch top 5 processes by CPU usage
+      shell: "ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head -n 6"
+      register: top_processes
+
+    - name: Split top processes output into lines
+      set_fact:
+        top_processes_lines: "{{ top_processes.stdout.split('\n') }}"
+
+    - name: Display top 5 processes for each host
+      block:
+        - name: Display host information
+          debug:
+            msg: "Top 5 processes for host: {{ inventory_hostname }}"
+
+        - name: Display header line
+          debug:
+            msg: "{{ top_processes_lines[0] }}"
+
+        - name: Display each process line
+          debug:
+            msg: "Process {{ item.0 }}: PID={{ item.1.split()[0] }}, PPID={{ item.1.split()[1] }}, CMD={{ ' '.join(item.1.split()[2:-2]) }}, RAM used={{ item.1.split()[-2] }}%, CPU used={{ item.1.split()[-1] }}%"
+          with_indexed_items: "{{ top_processes_lines[1:] }}"
+          when: item.1 != ""
+
