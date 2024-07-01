@@ -1,7 +1,9 @@
 ---
-- name: Install Apache Tomcat on Ubuntu and CentOS
-  hosts: all
+# This playbook deploys the Tomcat server using the tomcatSetup role.
 
+- name: Deploy Tomcat Server
+  hosts: centos
   roles:
-    - role: tomcat_install
+    - role: /home/purush/ansible/roles/tomcatSetup
+      
 

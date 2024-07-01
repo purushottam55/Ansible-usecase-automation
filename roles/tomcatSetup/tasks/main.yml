@@ -1,0 +1,50 @@
+---
+- name: Install dependencies
+  ansible.builtin.yum:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - java-1.8.0-openjdk
+    - wget
+  when: ansible_os_family == "RedHat"
+
+- name: Install dependencies
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - openjdk-8-jdk
+    - wget
+  when: ansible_os_family == "Debian"
+
+- name: Download Tomcat
+  ansible.builtin.get_url:
+    url: "{{ tomcat_download_url }}"
+    dest: /tmp/apache-tomcat-{{ tomcat_version }}.tar.gz
+
+- name: Extract Tomcat
+  ansible.builtin.unarchive:
+    src: /tmp/apache-tomcat-{{ tomcat_version }}.tar.gz
+    dest: /opt/
+    remote_src: yes
+
+- name: Create symbolic link to Tomcat
+  ansible.builtin.file:
+    src: /opt/apache-tomcat-{{ tomcat_version }}
+    dest: /opt/tomcat
+    state: link
+
+- name: Configure Tomcat users
+  ansible.builtin.template:
+    src: tomcat-users.xml.j2
+    dest: /opt/tomcat/conf/tomcat-users.xml
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Ensure Tomcat is running
+  ansible.builtin.systemd:
+    name: tomcat9
+    state: started
+    enabled: yes
+
