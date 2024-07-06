@@ -1,6 +1,8 @@
-# Ansible VM Automation
+# Ansible VM Automation and codeVersion control in docker container.
 This repository contains Ansible playbooks and scripts to automate the workload on running VMs in Ubuntu and CentOS environments. The automation includes installing Apache Tomcat, monitoring system workload, and more.
 
+## Problem statement:
+Using ansible automante centos and ubuntu server running on the vmware. Continues tracking the code version control. Write playbooks mentioned in userstory.
 
 User Story :
 
@@ -17,6 +19,4 @@ User Story :
 - Git
 - Ansible
 
-
-#Demo
 
