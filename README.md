@@ -18,5 +18,3 @@ User Story :
 - Ansible
 
 
-#Demo
-
