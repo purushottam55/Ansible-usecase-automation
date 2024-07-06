@@ -1,38 +1,26 @@
-Role Name
-=========
+# Tomcat Role
 
-A brief description of the role goes here.
+## Description
 
-Requirements
-------------
+This role installs and configures Apache Tomcat on target hosts.
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+## Requirements
 
-Role Variables
---------------
+Ensure the target system has the necessary pre-requisites, including:
+- A supported version of Java (JDK 8 or higher).
+- Sufficient disk space for the Tomcat installation.
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+## Role Variables
 
-Dependencies
-------------
+The following variables can be set to customize the Tomcat installation and configuration:
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+- `http_port`: Port for HTTP connections (default: 8080)
+- `https_port`: Port for HTTPS connections (default: 8443)
+- `admin_username`: Username for Tomcat admin (default: admin)
+- `admin_password`: Password for Tomcat admin (default: admin)
+- `tomcat_version`: Version of Tomcat to install (default: 9.0.54)
+- `tomcat_download_url`: URL to download Tomcat (default: https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.54/bin/apache-tomcat-9.0.54.tar.gz)
 
-Example Playbook
-----------------
+These variables can be defined in `defaults/main.yml`, `vars/main.yml`, or set via parameters to the role.
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
