@@ -4,8 +4,8 @@
   become: yes
 
   vars:
-    newuser_password: 2001  
-
+    newuser_password: purush 
+      
   tasks:
     - name: Create the new user
       user:
