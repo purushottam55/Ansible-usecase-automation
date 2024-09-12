@@ -18,5 +18,7 @@ User Story :
 - Docker
 - Git
 - Ansible
+- 1 or more vm's installed on vmware ->
+  // in this project we choosen centos and ubuntu.
 
 
