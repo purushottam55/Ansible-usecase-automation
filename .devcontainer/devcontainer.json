@@ -1,0 +1,10 @@
+{
+  "name": "RHEL7 Testing",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "settings": {},
+  "postCreateCommand": "yum install -y python3 sudo && pip3 install ansible",
+  "remoteUser": "dev"
+}
+
